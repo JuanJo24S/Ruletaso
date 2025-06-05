@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruletaso/screens/challenge_screen.dart';
+import 'package:ruletaso/screens/wireless_tests.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -61,6 +62,28 @@ class StartScreen extends StatelessWidget {
                     Text('Agregar retos'),
                     SizedBox(width: 8),
                     Icon(Icons.add_circle_outline, size: 18),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 50), // Espacio vertical entre botones
+            // Segundo botón con el mismo ancho
+            SizedBox(
+              width: 200, // Mismo ancho para que se vean iguales
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => WirelessTest())
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text('Wireless config'),
+                    SizedBox(width: 8),
+                    Icon(Icons.settings_outlined, size: 18),
                   ],
                 ),
               ),

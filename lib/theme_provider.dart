@@ -10,14 +10,14 @@ final ValueNotifier<ThemeData> themeNotifier = ValueNotifier(
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(
-              horizontal: 20, vertical: 12),
+              horizontal: 10, vertical: 12),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15)
           ),
         foregroundColor: Colors.white,
         backgroundColor: Colors.red[700],
         textStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 10,
           fontWeight: FontWeight.bold
         ),
       ),
