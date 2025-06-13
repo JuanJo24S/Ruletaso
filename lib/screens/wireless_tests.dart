@@ -2,8 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:ruletaso/wireless/client.dart';
 import 'package:ruletaso/wireless/host.dart';
 
-class WirelessTest extends StatelessWidget {
+class WirelessTest extends StatefulWidget {
   const WirelessTest({super.key});
+
+  @override
+  State<WirelessTest> createState() => _WirelessTestState();
+}
+
+class _WirelessTestState extends State<WirelessTest> {
+  Host host = Host();
+  UDPStart start = UDPStart();
+  bool showInput = false;
+  final TextEditingController nameController = TextEditingController();
+
+  void _handleClientePressed() {
+    setState(() {
+      showInput = !showInput; // Alterna mostrar u ocultar el input
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +38,39 @@ class WirelessTest extends StatelessWidget {
           children: [
             _MinimalButton(
               label: 'Host',
-              onPressed: StartHostBroadcast,
+              onPressed: host.StartHostBroadcast,
             ),
             const SizedBox(height: 16),
             _MinimalButton(
               label: 'Cliente',
-              onPressed: ListenerForHost,
+              onPressed: _handleClientePressed,
             ),
+            if (showInput) ...[
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Ingresa tu nombre',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () {
+                  final name = nameController.text.trim();
+                  if (name.isNotEmpty) {
+                    // Aquí puedes iniciar el cliente con el nombre
+                    print('Nombre ingresado: $name');
+                    start.start(name);
+                    _handleClientePressed();
+                  }
+                },
+                child: const Text('Conectar'),
+              ),
+            ],
           ],
         ),
       ),
